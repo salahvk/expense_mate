@@ -1,5 +1,7 @@
 import 'package:expense_mate/config/route/route_constants.dart';
 import 'package:expense_mate/presentation/screens/add_expense/add_expense_screen.dart';
+import 'package:expense_mate/presentation/screens/authentication/auth_screen.dart';
+import 'package:expense_mate/presentation/screens/authentication/login_screen.dart';
 import 'package:expense_mate/presentation/screens/authentication/registration_screen.dart';
 import 'package:expense_mate/presentation/screens/home/expenses_screen.dart';
 import 'package:expense_mate/presentation/screens/splash/splash_screen.dart';
@@ -13,26 +15,24 @@ final GoRouter router = GoRouter(
   navigatorKey: navigatorKey,
   routes: [
     GoRoute(
-      name: Routes.register,
-      path: Routes.getRegisterRoute(),
-      pageBuilder: (context, state) =>
-          const MaterialPage(child: RegisterScreen()),
-    ),
-    GoRoute(
-      name: Routes.login,
-      path: Routes.getLoginRoute(),
-      pageBuilder: (context, state) =>
-          const MaterialPage(child: RegisterScreen()),
+      name: Routes.auth,
+      path: Routes.getAuthRoute(),
+      pageBuilder: (context, state) => MaterialPage(
+          child: AuthScreen(
+        isLogin: state.extra as bool,
+      )),
     ),
     GoRoute(
       name: Routes.splash,
       path: Routes.getSplashRoute(),
-      pageBuilder: (context, state) => const MaterialPage(child: SplashScreen()),
+      pageBuilder: (context, state) =>
+          const MaterialPage(child: SplashScreen()),
     ),
     GoRoute(
       name: Routes.home,
       path: Routes.getHomeRoute(),
-      pageBuilder: (context, state) => const MaterialPage(child: ExpensesScreen()),
+      pageBuilder: (context, state) =>
+          const MaterialPage(child: ExpensesScreen()),
     ),
     GoRoute(
       name: Routes.addExpense,

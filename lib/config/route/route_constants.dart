@@ -1,14 +1,13 @@
 class Routes {
-  static String home = "/";
-  static String splash = "splash";
-  static String login = "login";
-  static String register = "register";
+  static String splash = "/";
+  static String home = "home";
+  static String auth = "auth";
   static String addExpense = "addExpense";
   
   // ----------------------------------------------------
-  static String getHomeRoute() => "/$home";
-  static String getSplashRoute() => "/$splash";
-  static String getLoginRoute() => "/$login";
-  static String getRegisterRoute() => "/$login";
+  
+  static String getSplashRoute() => splash;
+  static String getHomeRoute() => "/$home";  
+  static String getAuthRoute() => "/$auth";
   static String getAddExpenseRoute() => "/$addExpense";
 }
