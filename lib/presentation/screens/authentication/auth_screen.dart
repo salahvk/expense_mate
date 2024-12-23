@@ -13,7 +13,6 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  
   final _formKey = GlobalKey<FormState>();
 
   TextEditingController emailController = TextEditingController();
@@ -26,6 +25,7 @@ class _AuthScreenState extends State<AuthScreen> {
         email: emailController.text,
         password: passwordController.text,
       );
+
       context.pushReplacement(Routes.getHomeRoute());
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -34,7 +34,7 @@ class _AuthScreenState extends State<AuthScreen> {
     }
   }
 
-    Future<void> _register() async {
+  Future<void> _register() async {
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: emailController.text,
@@ -51,16 +51,15 @@ class _AuthScreenState extends State<AuthScreen> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     bool isLogin = widget.isLogin;
-    
+
     return Scaffold(
       body: Container(
-        decoration:   const BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [ExpenseMateColors.primary,Colors.blueAccent],
+            colors: [ExpenseMateColors.primary, Colors.blueAccent],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -152,7 +151,8 @@ class _AuthScreenState extends State<AuthScreen> {
                           }
                         },
                         style: ElevatedButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 40, vertical: 15),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(16.0),
                           ),
@@ -161,12 +161,16 @@ class _AuthScreenState extends State<AuthScreen> {
                       ),
                       TextButton(
                         onPressed: () {
-                          setState(() {
-                            isLogin = !isLogin;
-                          });
+                          isLogin
+                              ? context.push(Routes.getAuthRoute(),
+                                  extra: false)
+                              : context.push(Routes.getAuthRoute(),
+                                  extra: true);
                         },
                         child: Text(
-                          isLogin ? "Don't have an account? Register" : 'Already have an account? Login',
+                          isLogin
+                              ? "Don't have an account? Register"
+                              : 'Already have an account? Login',
                         ),
                       ),
                     ],

@@ -1,8 +1,6 @@
 import 'package:expense_mate/config/route/route_constants.dart';
 import 'package:expense_mate/presentation/screens/add_expense/add_expense_screen.dart';
 import 'package:expense_mate/presentation/screens/authentication/auth_screen.dart';
-import 'package:expense_mate/presentation/screens/authentication/login_screen.dart';
-import 'package:expense_mate/presentation/screens/authentication/registration_screen.dart';
 import 'package:expense_mate/presentation/screens/home/expenses_screen.dart';
 import 'package:expense_mate/presentation/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
