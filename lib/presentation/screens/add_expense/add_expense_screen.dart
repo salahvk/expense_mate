@@ -4,7 +4,7 @@ import 'package:expense_mate/presentation/screens/transaction_date_picker_widget
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../bloc/expense_bloc.dart';
+import '../../bloc/expense_bloc.dart';
 
 class AddExpenseScreen extends StatefulWidget {
   const AddExpenseScreen({super.key});

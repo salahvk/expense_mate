@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'data/datasources/expense_db_helper.dart';
 import 'presentation/bloc/expense_bloc.dart';
-import 'presentation/screens/expenses_screen.dart';
+import 'presentation/screens/home/expenses_screen.dart';
 import 'services/notification_service.dart';
 
 void main() async {
