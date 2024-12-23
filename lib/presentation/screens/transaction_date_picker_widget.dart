@@ -74,6 +74,7 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
                       );
                       context.read<ExpenseBloc>().selectedDate =
                           selectedDateTime;
+                          print(context.read<ExpenseBloc>().selectedDate);
                     });
                   }
                 },

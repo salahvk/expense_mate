@@ -11,7 +11,7 @@ part 'expense_state.dart';
 class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   final ExpenseDBHelper dbHelper;
   DateTime selectedDate = DateTime.now();
-  TimeOfDay timeOfDay = TimeOfDay.now();
+  // TimeOfDay timeOfDay = TimeOfDay.now();
   
   ExpenseBloc(this.dbHelper) : super(ExpenseInitial()) {
     // Load Expenses

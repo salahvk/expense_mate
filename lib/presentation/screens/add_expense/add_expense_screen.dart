@@ -1,5 +1,4 @@
 import 'package:expense_mate/core/utilities/getters/get_texttheme.dart';
-import 'package:expense_mate/core/utilities/getters/get_user_mail.dart';
 import 'package:expense_mate/data/models/expense_model.dart';
 import 'package:expense_mate/presentation/screens/transaction_date_picker_widget.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +16,7 @@ class AddExpenseScreen extends StatefulWidget {
 class _AddExpenseScreenState extends State<AddExpenseScreen> {
   final TextEditingController _amountController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
-  final DateTime _selectedDate = DateTime.now();
+  
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +47,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
                   id: DateTime.now().millisecondsSinceEpoch,
                   amount: amount,
                   name: name,
-                  date: _selectedDate,
+                  date: context.read<ExpenseBloc>().selectedDate,
                 );
                 context.read<ExpenseBloc>().add(AddExpense(expense));
           

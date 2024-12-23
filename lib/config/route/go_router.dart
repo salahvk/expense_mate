@@ -1,7 +1,7 @@
 import 'package:expense_mate/config/route/route_constants.dart';
 import 'package:expense_mate/presentation/screens/add_expense/add_expense_screen.dart';
 import 'package:expense_mate/presentation/screens/authentication/auth_screen.dart';
-import 'package:expense_mate/presentation/screens/home/expenses_screen.dart';
+import 'package:expense_mate/presentation/screens/home/home_screen.dart';
 import 'package:expense_mate/presentation/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -30,7 +30,7 @@ final GoRouter router = GoRouter(
       name: Routes.home,
       path: Routes.getHomeRoute(),
       pageBuilder: (context, state) =>
-          const MaterialPage(child: ExpensesScreen()),
+          const MaterialPage(child: HomeScreen()),
     ),
     GoRoute(
       name: Routes.addExpense,
