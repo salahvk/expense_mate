@@ -25,7 +25,7 @@ class ExpenseDBHelper {
     // Open or create database
     return await openDatabase(
       path,
-      version: 1,
+      version: 2, // Changed version to 2 to account for schema updates
       onCreate: _onCreate,
       onUpgrade: _onUpgrade, // Add upgrade handling
     );
@@ -33,21 +33,36 @@ class ExpenseDBHelper {
 
   /// Create table schema
   Future<void> _onCreate(Database db, int version) async {
-    await db.execute('''
+    await db.execute(''' 
     CREATE TABLE expenses(
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       amount REAL,
       name TEXT,
       date TEXT,
-      userEmail TEXT  -- Added userEmail column
+      userEmail TEXT -- Added userEmail column
     )
-  ''');
+    ''');
+
+    // Create a table to store user login state
+    await db.execute('''
+    CREATE TABLE user_state(
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      userEmail TEXT,
+      isLoggedIn INTEGER -- 1 for logged in, 0 for logged out
+    )
+    ''');
   }
 
   Future<void> _onUpgrade(Database db, int oldVersion, int newVersion) async {
     if (oldVersion < 2) {
-      // Assuming version 2 has the new schema
-      await db.execute('ALTER TABLE expenses ADD COLUMN userEmail TEXT');
+      // If upgrading from version 1 to version 2, add the user_state table
+      await db.execute('''
+      CREATE TABLE user_state(
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        userEmail TEXT,
+        isLoggedIn INTEGER -- 1 for logged in, 0 for logged out
+      )
+      ''');
     }
   }
 
@@ -58,7 +73,7 @@ class ExpenseDBHelper {
     return _database!;
   }
 
-// Add an expense
+  // Add an expense
   Future<int> addExpense(ExpenseModel expense) async {
     final db = await database;
     return await db.insert(
@@ -70,7 +85,7 @@ class ExpenseDBHelper {
     );
   }
 
-// Get all expenses for the current user
+  // Get all expenses for the current user
   Future<List<ExpenseModel>> getExpenses() async {
     final db = await database;
     final String userEmail = getUserEmail() ?? '';
@@ -105,6 +120,41 @@ class ExpenseDBHelper {
       'expenses',
       where: 'id = ?',
       whereArgs: [id],
+    );
+  }
+
+  // Add a user login state
+  Future<void> setLoginState(String userEmail, bool isLoggedIn) async {
+    final db = await database;
+    await db.insert(
+      'user_state',
+      {'userEmail': userEmail, 'isLoggedIn': isLoggedIn ? 1 : 0},
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+  // Get the login state for the current user
+  Future<bool> isUserLoggedIn(String userEmail) async {
+    final db = await database;
+    final result = await db.query(
+      'user_state',
+      where: 'userEmail = ?',
+      whereArgs: [userEmail],
+    );
+
+    if (result.isNotEmpty) {
+      return result.first['isLoggedIn'] == 1;
+    }
+    return false;
+  }
+
+  // Log out the current user by clearing their login state
+  Future<void> logoutUser(String userEmail) async {
+    final db = await database;
+    await db.delete(
+      'user_state',
+      where: 'userEmail = ?',
+      whereArgs: [userEmail],
     );
   }
 }

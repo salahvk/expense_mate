@@ -1,4 +1,6 @@
 import 'package:expense_mate/config/route/route_constants.dart';
+import 'package:expense_mate/core/utilities/getters/get_user_mail.dart';
+import 'package:expense_mate/data/datasources/expense_db_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
@@ -15,10 +17,16 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-
-    // Navigate to the Login Screen after 3 seconds
-    Future.delayed(const Duration(seconds: 3), () {
-      context.pushReplacement(Routes.getAuthRoute(), extra: true);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(seconds: 3), () async {
+        bool isLoggedIn =
+            await ExpenseDBHelper().isUserLoggedIn(getUserEmail() ?? '');
+        isLoggedIn
+            ? context.pushReplacement(
+                Routes.getHomeRoute(),
+              )
+            : context.pushReplacement(Routes.getAuthRoute(), extra: true);
+      });
     });
   }
 

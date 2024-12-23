@@ -1,5 +1,4 @@
 import 'package:expense_mate/config/route/go_router.dart';
-import 'package:expense_mate/config/theme/color.dart';
 import 'package:expense_mate/config/theme/light_theme.dart';
 import 'package:expense_mate/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -31,6 +30,7 @@ void main() async {
     "Daily Expense Reminder",
     "Don't forget to log your expenses today!",
   );
+  
 
   runApp(ExpenseMateApp(dbHelper: dbHelper));
 }

@@ -1,5 +1,7 @@
 import 'package:expense_mate/config/route/route_constants.dart';
 import 'package:expense_mate/config/theme/color.dart';
+import 'package:expense_mate/core/utilities/getters/get_user_mail.dart';
+import 'package:expense_mate/data/datasources/expense_db_helper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -25,6 +27,7 @@ class _AuthScreenState extends State<AuthScreen> {
         email: emailController.text,
         password: passwordController.text,
       );
+      await ExpenseDBHelper().setLoginState(getUserEmail() ?? '', true);
 
       context.pushReplacement(Routes.getHomeRoute());
     } catch (e) {

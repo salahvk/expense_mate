@@ -1,5 +1,7 @@
 import 'package:expense_mate/core/extension/time_extension.dart';
 import 'package:expense_mate/core/utilities/getters/get_texttheme.dart';
+import 'package:expense_mate/core/utilities/getters/get_user_mail.dart';
+import 'package:expense_mate/data/datasources/expense_db_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -13,7 +15,16 @@ class ExpensesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Expenses")),
+      appBar: AppBar(
+        title: const Text("Expenses"),
+        actions: [
+          IconButton(
+              onPressed: () {
+                ExpenseDBHelper().logoutUser(getUserEmail() ?? '');
+              },
+              icon: Icon(MdiIcons.logout))
+        ],
+      ),
       body: BlocBuilder<ExpenseBloc, ExpenseState>(
         builder: (context, state) {
           if (state is ExpenseLoading) {
