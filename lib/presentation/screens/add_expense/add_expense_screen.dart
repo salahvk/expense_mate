@@ -40,7 +40,7 @@ class _AddExpenseScreenState extends State<AddExpenseScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_rounded),
           onPressed: () {
-            Navigator.pop(context);
+            context.pop();
           },
         ),
         title: Text(
