@@ -1,3 +1,4 @@
+import 'package:expense_mate/config/theme/color.dart';
 import 'package:flutter/material.dart';
 
 class ToggleButton extends StatelessWidget {
@@ -22,7 +23,7 @@ class ToggleButton extends StatelessWidget {
         margin: const EdgeInsets.symmetric(horizontal: 8.0),
         padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 24.0),
         decoration: BoxDecoration(
-          color: isSelected ? Colors.blue : Colors.grey[300],
+          color: isSelected ? ExpenseMateColors.primary : Colors.grey[300],
           borderRadius: BorderRadius.circular(8),
           border: Border.all(
             color: isSelected ? Colors.blue : Colors.grey,

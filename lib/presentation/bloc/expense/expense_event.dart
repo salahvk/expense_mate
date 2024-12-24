@@ -9,5 +9,5 @@ class ExpenseEvent with _$ExpenseEvent {
   const factory ExpenseEvent.clearExpenses() = ClearExpenses;
   const factory ExpenseEvent.updateSelectedDate({required DateTime selectedDateTime}) = UpdateSelectedDate;
   const factory ExpenseEvent.updatePaymentType(PaymentType paymentType) = UpdatePaymentTypeEvent;
-  const factory ExpenseEvent.updateSelectedIndex(int index) = UpdateSelectedIndex;
+  const factory ExpenseEvent.updateExpenseCategory(ExpenseCategory expenseCategory) = UpdateExpenseCategory;
 }

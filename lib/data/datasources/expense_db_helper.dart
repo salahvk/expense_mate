@@ -8,7 +8,6 @@ import '../models/expense_model.dart';
 class ExpenseDBHelper {
   static Database? _database;
 
-  // Singleton pattern to reuse the database instance
   static final ExpenseDBHelper _instance = ExpenseDBHelper._internal();
 
   factory ExpenseDBHelper() {
@@ -105,19 +104,6 @@ class ExpenseDBHelper {
   }
 
   // Update an expense
-  // Future<int> updateExpense(ExpenseModel expense) async {
-  //   final db = await database;
-  //   print(db);
-  //   final s = await db.update(
-  //     'expenses',
-  //     expense.toMap(),
-  //     where: 'id = ?',
-  //     whereArgs: [expense.id],
-  //   );
-  //   print(s);
-  //   return s;
-
-  // }
   Future<int> updateExpense(ExpenseModel expense) async {
     final db = await database;
     final userEmail = getUserEmail() ?? '';
@@ -132,9 +118,9 @@ class ExpenseDBHelper {
       whereArgs: [expense.id, userEmail],
     );
     if (result == 0) {
-      print('No rows updated. Verify the expense ID and user email.');
+      debugPrint('No rows updated. Verify the expense ID and user email.');
     } else {
-      print('Expense updated successfully');
+      debugPrint('Expense updated successfully');
     }
 
     return result;
@@ -149,7 +135,7 @@ class ExpenseDBHelper {
 
     final result = await db.delete(
       'expenses',
-      where: 'id = ? AND userEmail = ?', // Include userEmail in condition
+      where: 'id = ? AND userEmail = ?',
       whereArgs: [id, userEmail],
     );
 

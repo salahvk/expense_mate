@@ -19,9 +19,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   // Login event handler
   FutureOr<void> _onLogin(_Login event, Emitter<AuthState> emit) async {
-    emit(state.copyWith(isLoading: true)); // Set loading state
+    emit(state.copyWith(isLoading: true)); 
     try {
-      final userCredential = await _firebaseAuth.signInWithEmailAndPassword(
+       await _firebaseAuth.signInWithEmailAndPassword(
         email: event.email,
         password: event.password,
       );
@@ -43,7 +43,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   FutureOr<void> _onRegister(_Register event, Emitter<AuthState> emit) async {
     emit(state.copyWith(isLoading: true)); // Set loading state
     try {
-      final userCredential = await _firebaseAuth.createUserWithEmailAndPassword(
+       await _firebaseAuth.createUserWithEmailAndPassword(
         email: event.email,
         password: event.password,
       );
@@ -63,7 +63,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   // Logout event handler
   FutureOr<void> _onLogout(_Logout event, Emitter<AuthState> emit) async {
-    emit(state.copyWith(isLoading: true)); // Set loading state
+    emit(state.copyWith(isLoading: true)); 
     try {
       await _firebaseAuth.signOut();
       emit(state.copyWith(

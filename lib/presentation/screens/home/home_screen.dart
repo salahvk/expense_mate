@@ -1,4 +1,5 @@
 import 'package:expense_mate/config/route/route_constants.dart';
+import 'package:expense_mate/core/utilities/getters/get_texttheme.dart';
 import 'package:expense_mate/core/utilities/getters/get_user_mail.dart';
 import 'package:expense_mate/data/datasources/expense_db_helper.dart';
 import 'package:expense_mate/presentation/bloc/auth/auth_bloc.dart';
@@ -19,18 +20,8 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Expenses"),
-        actions: [
-          IconButton(
-              onPressed: () {
-                context.read<AuthBloc>().add(
-                      const AuthEvent.logout(),
-                    );
-                ExpenseDBHelper().logoutUser(getUserEmail() ?? '');
-                context.pushReplacement(Routes.getAuthRoute(), extra: true);
-              },
-              icon: Icon(MdiIcons.logout))
-        ],
+        title:  Text("Expense Mate",style: getTextTheme(context).headlineMedium,),
+        actions: const [HomeLogoutButton()],
       ),
       body: BlocBuilder<ExpenseBloc, ExpenseState>(
         builder: (context, state) {
@@ -53,14 +44,44 @@ class HomeScreen extends StatelessWidget {
           return const Center(child: Text("No data"));
         },
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: const HomeFloatingActionButton(),
+    );
+  }
+}
+
+class HomeLogoutButton extends StatelessWidget {
+  const HomeLogoutButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
         onPressed: () {
-          context.push(Routes.getAddExpenseRoute(), extra: {
-            'isEditing': false,
-          });
+          context.read<AuthBloc>().add(
+                const AuthEvent.logout(),
+              );
+          ExpenseDBHelper().logoutUser(getUserEmail() ?? '');
+          context.pushReplacement(Routes.getAuthRoute(), extra: true);
         },
-        child: const Icon(Icons.add),
-      ),
+        icon: Icon(MdiIcons.logout));
+  }
+}
+
+class HomeFloatingActionButton extends StatelessWidget {
+  const HomeFloatingActionButton({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () {
+        context.push(Routes.getAddExpenseRoute(), extra: {
+          'isEditing': false,
+        });
+      },
+      child: const Icon(Icons.add),
     );
   }
 }

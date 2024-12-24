@@ -25,5 +25,16 @@ ThemeData lightTheme = ThemeData(
       borderSide: const BorderSide(color: ExpenseMateColors.primary, width: 3),
     ),
   ),
+  // Define ElevatedButton theme
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: ExpenseMateColors.primary, // Button background color
+      foregroundColor: Colors.white, // Text color
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10), // Rounded corners
+      ),
+    ),
+  ),
   textTheme: AppTextTheme.textTheme(fontFamily: 'Poppins'),
 );

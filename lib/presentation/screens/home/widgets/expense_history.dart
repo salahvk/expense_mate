@@ -1,10 +1,10 @@
 import 'package:expense_mate/config/route/route_constants.dart';
+import 'package:expense_mate/core/enum/expense_category.dart';
 import 'package:expense_mate/core/enum/payment_type.dart';
 import 'package:expense_mate/core/extension/time_extension.dart';
 import 'package:expense_mate/core/utilities/getters/get_texttheme.dart';
 import 'package:expense_mate/data/models/expense_model.dart';
 import 'package:expense_mate/presentation/bloc/expense/expense_bloc.dart';
-import 'package:expense_mate/presentation/screens/add_expense/add_expense_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -31,26 +31,23 @@ class ExpenseHistory extends StatelessWidget {
           itemBuilder: (context, index) {
             final expense = expenses[index];
 
-            // Get formatted date header (e.g., "Tue 24 Dec")
-            final String dateHeader = state.selectedButtonIndex == 0
-                ? expense.date.toReadable
-                : state.selectedButtonIndex == 1
-                    ? expense.date.toWeeklyReadable
-                    : expense.date.monthString;
+            final String dateHeader =
+                state.selectedExpenseCategory == ExpenseCategory.daily
+                    ? expense.date.toReadable
+                    : state.selectedExpenseCategory == ExpenseCategory.weekly
+                        ? expense.date.toWeeklyReadable
+                        : expense.date.monthString;
 
-            // Check if this header has already been displayed
             final bool shouldShowHeader =
                 !displayedHeaders.contains(dateHeader);
 
             if (shouldShowHeader) {
-              // Add the date to the displayed set
               displayedHeaders.add(dateHeader);
             }
 
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Show header only if it hasn't been displayed before
                 if (shouldShowHeader)
                   Padding(
                     padding: const EdgeInsets.only(left: 10, top: 10),
@@ -78,6 +75,7 @@ class ExpenseHistory extends StatelessWidget {
                   ),
                   title: Text(
                     "${expense.name} - ${expense.date.toLocal()}".split(' ')[0],
+                    style: getTextTheme(context).headlineSmall,
                   ),
                   subtitle: Row(
                     children: [
@@ -85,13 +83,10 @@ class ExpenseHistory extends StatelessWidget {
                     ],
                   ),
                   onTap: () {
-                    context.push(
-                      Routes.getAddExpenseRoute(),extra: 
-                      {
-                        'expense': expense,
-                        'isEditing': true,
-                      }
-                    );
+                    context.push(Routes.getAddExpenseRoute(), extra: {
+                      'expense': expense,
+                      'isEditing': true,
+                    });
                   },
                 ),
               ],

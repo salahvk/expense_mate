@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:expense_mate/core/enum/expense_category.dart';
 import 'package:expense_mate/core/enum/payment_type.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -18,7 +19,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   ExpenseBloc(this.dbHelper) : super(ExpenseState.initial()) {
     on<UpdatePaymentTypeEvent>(_onUpdatePaymentType);
     on<UpdateSelectedDate>(_onUpdateSelectedDate);
-    on<UpdateSelectedIndex>(_onUpdateSelectedIndex);
+    on<UpdateExpenseCategory>(_onUpdateSelectedIndex);
     // Fetch Expenses
     on<FetchExpenses>((event, emit) async {
       emit(state.copyWith(isLoading: true));
@@ -67,16 +68,6 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
       }
     });
 
-    //   // Clear Expenses
-    //   on<ClearExpenses>((event, emit) async {
-    //     emit(state.copyWith(isLoading: true));
-    //     try {
-    //       await dbHelper.clearExpenses();
-    //       add(const FetchExpenses());
-    //     } catch (e) {
-    //       emit(state.copyWith(isLoading: false, errorMessage: "Failed to clear expenses"));
-    //     }
-    //   });
   }
 
   FutureOr<void> _onUpdatePaymentType(
@@ -90,7 +81,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   }
 
   FutureOr<void> _onUpdateSelectedIndex(
-      UpdateSelectedIndex event, Emitter<ExpenseState> emit) {
+      UpdateExpenseCategory event, Emitter<ExpenseState> emit) {
     // Get the current date
     DateTime now = DateTime.now();
 
@@ -100,7 +91,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
 
     for (var expense in state.expenses) {
       // Calculate for Daily
-      if (event.index == 0 &&
+      if (event.expenseCategory == ExpenseCategory.daily &&
           expense.date.year == now.year &&
           expense.date.month == now.month &&
           expense.date.day == now.day) {
@@ -111,7 +102,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
         }
       }
       // Calculate for Weekly
-      else if (event.index == 1) {
+      else if (event.expenseCategory == ExpenseCategory.weekly) {
         DateTime startOfWeek = now.subtract(Duration(days: now.weekday - 1));
         DateTime endOfWeek = startOfWeek.add(const Duration(days: 6));
 
@@ -126,7 +117,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
         }
       }
       // Calculate for Monthly
-      else if (event.index == 2 &&
+      else if (event.expenseCategory == ExpenseCategory.monthly &&
           expense.date.year == now.year &&
           expense.date.month == now.month) {
         if (expense.paymentType == PaymentType.cash) {
@@ -138,7 +129,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
     }
 
     emit(state.copyWith(
-        selectedButtonIndex: event.index,
+        selectedExpenseCategory: event.expenseCategory,
         cashTotal: cashTotal,
         bankTotal: bankTotal));
   }

@@ -1,10 +1,3 @@
-// yyyy/mm/dd
-// yy/mm/dd
-// mm/dd/yyyy
-// mm/dd/yy
-// dd/mm/yyyy
-// dd/mm/yyyy
-
 import 'package:intl/intl.dart';
 
 enum CalendarFormats {

@@ -41,7 +41,6 @@ class NotificationService {
           priority: Priority.high,
         ),
       ),
-      // androidAllowWhileIdle: true,
       matchDateTimeComponents: DateTimeComponents.time,
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,

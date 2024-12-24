@@ -1,6 +1,9 @@
+import 'package:expense_mate/config/theme/color.dart';
+import 'package:expense_mate/core/enum/expense_category.dart';
 import 'package:expense_mate/presentation/bloc/expense/expense_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class ExpenseSummaryCard extends StatefulWidget {
   const ExpenseSummaryCard({super.key});
@@ -13,7 +16,7 @@ class _ExpenseSummaryCardState extends State<ExpenseSummaryCard> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    context.read<ExpenseBloc>().add(const ExpenseEvent.updateSelectedIndex(0));
+    context.read<ExpenseBloc>().add(const ExpenseEvent.updateExpenseCategory(ExpenseCategory.daily));
   }
   @override
   Widget build(BuildContext context) {
@@ -58,7 +61,7 @@ class _ExpenseSummaryCardState extends State<ExpenseSummaryCard> {
                       context,
                       'Cash',
                       state.cashTotal,
-                      Icons.money,
+                      MdiIcons.cash100,
                       Colors.green.shade300,
                     ),
                     _buildSummaryCard(
@@ -66,7 +69,7 @@ class _ExpenseSummaryCardState extends State<ExpenseSummaryCard> {
                       'Bank',
                       state.bankTotal,
                       Icons.account_balance,
-                      Colors.blue.shade300,
+                      ExpenseMateColors.primary,
                     ),
                   ],
                 ),
@@ -75,10 +78,10 @@ class _ExpenseSummaryCardState extends State<ExpenseSummaryCard> {
                 // Total expenses section
                 Center(
                   child: Text(
-                    'Total Expenses: \$${(state.bankTotal + state.cashTotal).toStringAsFixed(2)}',
+                    '${state.selectedExpenseCategory.displayName} Expenses: \$${(state.bankTotal + state.cashTotal).toStringAsFixed(2)}',
                     style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                           fontWeight: FontWeight.bold,
-                          color: Colors.deepOrangeAccent,
+                          color: ExpenseMateColors.primary,fontSize: 20
                         ),
                   ),
                 ),

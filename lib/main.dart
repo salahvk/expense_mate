@@ -27,6 +27,7 @@ void main() async {
   await notificationService.initNotifications();
 
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  
   // Schedule daily reminder
   await notificationService.scheduleDailyReminder(
     0,

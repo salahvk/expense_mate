@@ -1,3 +1,4 @@
+import 'package:expense_mate/core/enum/expense_category.dart';
 import 'package:expense_mate/presentation/bloc/expense/expense_bloc.dart';
 import 'package:expense_mate/presentation/screens/home/widgets/toggle_button.dart';
 import 'package:flutter/material.dart';
@@ -18,9 +19,12 @@ class SelectableButtonRow extends StatelessWidget {
               child: ToggleButton(
                 label: 'Daily',
                 index: 0,
-                isSelected: state.selectedButtonIndex == 0,
+                isSelected:
+                    state.selectedExpenseCategory == ExpenseCategory.daily,
                 onPressed: () {
-                  context.read<ExpenseBloc>().add(const ExpenseEvent.updateSelectedIndex(0));
+                  context.read<ExpenseBloc>().add(
+                      const ExpenseEvent.updateExpenseCategory(
+                          ExpenseCategory.daily));
                 },
               ),
             ),
@@ -30,9 +34,14 @@ class SelectableButtonRow extends StatelessWidget {
               child: ToggleButton(
                 label: 'Weekly',
                 index: 1,
-                isSelected: state.selectedButtonIndex == 1,
+                isSelected:
+                    state.selectedExpenseCategory == ExpenseCategory.weekly,
                 onPressed: () {
-                  context.read<ExpenseBloc>().add(const ExpenseEvent.updateSelectedIndex(1));
+                  context
+                      .read<ExpenseBloc>()
+                      .add(const ExpenseEvent.updateExpenseCategory(
+                        ExpenseCategory.weekly,
+                      ));
                 },
               ),
             ),
@@ -42,9 +51,12 @@ class SelectableButtonRow extends StatelessWidget {
               child: ToggleButton(
                 label: 'Monthly',
                 index: 2,
-                isSelected: state.selectedButtonIndex == 2,
+                isSelected:
+                    state.selectedExpenseCategory == ExpenseCategory.monthly,
                 onPressed: () {
-                  context.read<ExpenseBloc>().add(const ExpenseEvent.updateSelectedIndex(2));
+                  context.read<ExpenseBloc>().add(
+                      const ExpenseEvent.updateExpenseCategory(
+                          ExpenseCategory.monthly));
                 },
               ),
             ),
