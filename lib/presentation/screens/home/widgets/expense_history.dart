@@ -1,11 +1,13 @@
+import 'package:expense_mate/config/route/route_constants.dart';
 import 'package:expense_mate/core/enum/payment_type.dart';
 import 'package:expense_mate/core/extension/time_extension.dart';
 import 'package:expense_mate/core/utilities/getters/get_texttheme.dart';
 import 'package:expense_mate/data/models/expense_model.dart';
-import 'package:expense_mate/presentation/bloc/expense_bloc.dart';
+import 'package:expense_mate/presentation/bloc/expense/expense_bloc.dart';
 import 'package:expense_mate/presentation/screens/add_expense/add_expense_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 class ExpenseHistory extends StatelessWidget {
   const ExpenseHistory({
@@ -83,11 +85,12 @@ class ExpenseHistory extends StatelessWidget {
                     ],
                   ),
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const AddExpenseScreen(),
-                      ),
+                    context.push(
+                      Routes.getAddExpenseRoute(),extra: 
+                      {
+                        'expense': expense,
+                        'isEditing': true,
+                      }
                     );
                   },
                 ),

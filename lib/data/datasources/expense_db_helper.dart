@@ -1,4 +1,5 @@
 import 'package:expense_mate/core/utilities/getters/get_user_mail.dart';
+import 'package:flutter/material.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -33,7 +34,7 @@ class ExpenseDBHelper {
 
   /// Create table schema
   Future<void> _onCreate(Database db, int version) async {
-    await db.execute(''' 
+    await db.execute('''
     CREATE TABLE expenses(
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       amount REAL,
@@ -104,24 +105,61 @@ class ExpenseDBHelper {
   }
 
   // Update an expense
+  // Future<int> updateExpense(ExpenseModel expense) async {
+  //   final db = await database;
+  //   print(db);
+  //   final s = await db.update(
+  //     'expenses',
+  //     expense.toMap(),
+  //     where: 'id = ?',
+  //     whereArgs: [expense.id],
+  //   );
+  //   print(s);
+  //   return s;
+
+  // }
   Future<int> updateExpense(ExpenseModel expense) async {
     final db = await database;
-    return await db.update(
+    final userEmail = getUserEmail() ?? '';
+
+    debugPrint('Updating expense with ID: ${expense.id}');
+    debugPrint('Expense data: ${expense.toMap()}');
+    debugPrint('User Email: $userEmail');
+    final result = await db.update(
       'expenses',
       expense.toMap(),
-      where: 'id = ?',
-      whereArgs: [expense.id],
+      where: 'id = ? AND userEmail = ?', // Include userEmail in condition;
+      whereArgs: [expense.id, userEmail],
     );
+    if (result == 0) {
+      print('No rows updated. Verify the expense ID and user email.');
+    } else {
+      print('Expense updated successfully');
+    }
+
+    return result;
   }
 
-  // Delete an expense
   Future<int> deleteExpense(int id) async {
     final db = await database;
-    return await db.delete(
+    final userEmail = getUserEmail() ?? '';
+
+    debugPrint('Deleting expense with ID: $id');
+    debugPrint('User Email: $userEmail');
+
+    final result = await db.delete(
       'expenses',
-      where: 'id = ?',
-      whereArgs: [id],
+      where: 'id = ? AND userEmail = ?', // Include userEmail in condition
+      whereArgs: [id, userEmail],
     );
+
+    if (result == 0) {
+      debugPrint('No rows deleted. Verify the expense ID and user email.');
+    } else {
+      debugPrint('Expense deleted successfully.');
+    }
+
+    return result;
   }
 
   // Add a user login state

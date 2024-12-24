@@ -1,14 +1,16 @@
+import 'package:expense_mate/config/route/route_constants.dart';
 import 'package:expense_mate/core/utilities/getters/get_user_mail.dart';
 import 'package:expense_mate/data/datasources/expense_db_helper.dart';
+import 'package:expense_mate/presentation/bloc/auth/auth_bloc.dart';
 import 'package:expense_mate/presentation/screens/home/widgets/expense_history.dart';
 import 'package:expense_mate/presentation/screens/home/widgets/expense_summary_card.dart';
 import 'package:expense_mate/presentation/screens/home/widgets/selectable_button_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-import '../../bloc/expense_bloc.dart';
-import '../add_expense/add_expense_screen.dart';
+import '../../bloc/expense/expense_bloc.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -21,7 +23,11 @@ class HomeScreen extends StatelessWidget {
         actions: [
           IconButton(
               onPressed: () {
+                context.read<AuthBloc>().add(
+                      const AuthEvent.logout(),
+                    );
                 ExpenseDBHelper().logoutUser(getUserEmail() ?? '');
+                context.pushReplacement(Routes.getAuthRoute(), extra: true);
               },
               icon: Icon(MdiIcons.logout))
         ],
@@ -36,7 +42,9 @@ class HomeScreen extends StatelessWidget {
             return ListView(children: [
               const ExpenseSummaryCard(),
               const SelectableButtonRow(),
-              ExpenseHistory(expenses: expenses,),
+              ExpenseHistory(
+                expenses: expenses,
+              ),
             ]);
           } else if (state.errorMessage != null) {
             return Center(child: Text(state.errorMessage!));
@@ -47,10 +55,9 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (_) => const AddExpenseScreen()),
-          );
+          context.push(Routes.getAddExpenseRoute(), extra: {
+            'isEditing': false,
+          });
         },
         child: const Icon(Icons.add),
       ),

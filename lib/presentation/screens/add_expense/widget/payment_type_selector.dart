@@ -1,5 +1,5 @@
 import 'package:expense_mate/core/enum/payment_type.dart';
-import 'package:expense_mate/presentation/bloc/expense_bloc.dart';
+import 'package:expense_mate/presentation/bloc/expense/expense_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

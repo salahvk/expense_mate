@@ -17,9 +17,10 @@ final GoRouter router = GoRouter(
       name: Routes.auth,
       path: Routes.getAuthRoute(),
       pageBuilder: (context, state) => buildPageWithFadeTransition(
-           AuthScreen(
-        isLogin: state.extra as bool,
-      ),state),
+          AuthScreen(
+            isLogin: state.extra as bool,
+          ),
+          state),
     ),
     GoRoute(
       name: Routes.splash,
@@ -36,8 +37,11 @@ final GoRouter router = GoRouter(
     GoRoute(
       name: Routes.addExpense,
       path: Routes.getAddExpenseRoute(),
-      pageBuilder: (context, state) =>
-           buildPageWithFadeTransition( const AddExpenseScreen(),state),
+      pageBuilder: (context, state) => buildPageWithFadeTransition(
+          AddExpenseScreen(
+            args: state.extra as Map,
+          ),
+          state),
     ),
   ],
   errorBuilder: (context, state) => const Scaffold(

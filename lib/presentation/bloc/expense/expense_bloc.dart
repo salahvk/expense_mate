@@ -4,8 +4,8 @@ import 'package:expense_mate/core/enum/payment_type.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../data/datasources/expense_db_helper.dart';
-import '../../data/models/expense_model.dart';
+import '../../../data/datasources/expense_db_helper.dart';
+import '../../../data/models/expense_model.dart';
 
 part 'expense_bloc.freezed.dart';
 part 'expense_event.dart';

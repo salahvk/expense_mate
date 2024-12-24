@@ -1,4 +1,4 @@
-import 'package:expense_mate/presentation/bloc/expense_bloc.dart';
+import 'package:expense_mate/presentation/bloc/expense/expense_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -104,6 +104,7 @@ class _ExpenseSummaryCardState extends State<ExpenseSummaryCard> {
         borderRadius: BorderRadius.circular(12),
       ),
       child: Container(
+        width: MediaQuery.of(context).size.width * 0.3,
         padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
