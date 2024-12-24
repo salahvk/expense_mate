@@ -1,4 +1,5 @@
 import 'package:expense_mate/config/route/route_constants.dart';
+import 'package:expense_mate/config/route/transition.dart';
 import 'package:expense_mate/presentation/screens/add_expense/add_expense_screen.dart';
 import 'package:expense_mate/presentation/screens/authentication/auth_screen.dart';
 import 'package:expense_mate/presentation/screens/home/home_screen.dart';
@@ -15,28 +16,28 @@ final GoRouter router = GoRouter(
     GoRoute(
       name: Routes.auth,
       path: Routes.getAuthRoute(),
-      pageBuilder: (context, state) => MaterialPage(
-          child: AuthScreen(
+      pageBuilder: (context, state) => buildPageWithFadeTransition(
+           AuthScreen(
         isLogin: state.extra as bool,
-      )),
+      ),state),
     ),
     GoRoute(
       name: Routes.splash,
       path: Routes.getSplashRoute(),
       pageBuilder: (context, state) =>
-          const MaterialPage(child: SplashScreen()),
+          buildPageWithFadeTransition(const SplashScreen(), state),
     ),
     GoRoute(
       name: Routes.home,
       path: Routes.getHomeRoute(),
       pageBuilder: (context, state) =>
-          const MaterialPage(child: HomeScreen()),
+          buildPageWithFadeTransition(const HomeScreen(), state),
     ),
     GoRoute(
       name: Routes.addExpense,
       path: Routes.getAddExpenseRoute(),
       pageBuilder: (context, state) =>
-          const MaterialPage(child: AddExpenseScreen()),
+           buildPageWithFadeTransition( const AddExpenseScreen(),state),
     ),
   ],
   errorBuilder: (context, state) => const Scaffold(

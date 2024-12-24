@@ -1,8 +1,8 @@
+import 'package:expense_mate/core/enum/payment_type.dart';
 import 'package:expense_mate/core/extension/time_extension.dart';
 import 'package:expense_mate/core/utilities/getters/get_texttheme.dart';
 import 'package:expense_mate/data/models/expense_model.dart';
 import 'package:expense_mate/presentation/screens/add_expense/add_expense_screen.dart';
-import 'package:expense_mate/presentation/screens/home/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -27,7 +27,7 @@ class ExpenseHistory extends StatelessWidget {
 
         return ListTile(
           leading: CircleAvatar(
-            child: Icon(MdiIcons.cardBulleted),
+            child: Icon(expense.paymentType?.displayIcon),
           ),
           trailing: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -72,4 +72,3 @@ class ExpenseHistory extends StatelessWidget {
     );
   }
 }
-

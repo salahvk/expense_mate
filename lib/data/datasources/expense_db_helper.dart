@@ -39,7 +39,8 @@ class ExpenseDBHelper {
       amount REAL,
       name TEXT,
       date TEXT,
-      userEmail TEXT -- Added userEmail column
+      userEmail TEXT, -- Added userEmail column
+      paymentType INTEGER -- Added paymentType column
     )
     ''');
 

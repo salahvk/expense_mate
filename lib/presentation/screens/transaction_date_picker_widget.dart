@@ -1,24 +1,12 @@
 import 'package:expense_mate/core/extension/time_extension.dart';
-import 'package:expense_mate/core/utilities/getters/get_texttheme.dart';
 import 'package:expense_mate/presentation/bloc/expense_bloc.dart';
 import 'package:expense_mate/presentation/widgets/expense_mate_date_time_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-
-class ExpenseDatePickerWidget extends StatefulWidget {
-  const ExpenseDatePickerWidget({
-    super.key,
-  });
-
-  @override
-  State<ExpenseDatePickerWidget> createState() =>
-      _ExpenseDatePickerWidgetState();
-}
-
-class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
-  late DateTime selectedDateTime = context.read<ExpenseBloc>().selectedDate;
+class ExpenseDatePickerWidget extends StatelessWidget {
+  const ExpenseDatePickerWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,27 +22,25 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
                 onTap: () async {
                   final DateTime? dateTime = await expenseMateDatePicker(
                     context,
-                    selectedDateTime: selectedDateTime,
+                    selectedDateTime:
+                        context.read<ExpenseBloc>().state.selectedDateTime,
                   );
                   if (dateTime != null) {
-                    setState(() {
-                      selectedDateTime = selectedDateTime.copyWith(
-                        day: dateTime.day,
-                        month: dateTime.month,
-                        year: dateTime.year,
-                      );
-                      context.read<ExpenseBloc>().selectedDate =
-                          selectedDateTime;
-                    });
+                    context.read<ExpenseBloc>().add(
+                        ExpenseEvent.updateSelectedDate(
+                            selectedDateTime: dateTime));
                   }
                 },
                 leading: const Icon(
                   Icons.today_rounded,
-                  // color: context.secondary,
                 ),
                 title: Text(
-                  selectedDateTime.formattedDate,
-                  style: getTextTheme(context).bodyMedium,
+                  context
+                      .watch<ExpenseBloc>()
+                      .state
+                      .selectedDateTime
+                      .formattedDate,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ),
             ),
@@ -67,24 +53,28 @@ class _ExpenseDatePickerWidgetState extends State<ExpenseDatePickerWidget> {
                   final TimeOfDay? timeOfDay =
                       await expenseMateTimerPicker(context);
                   if (timeOfDay != null) {
-                    setState(() {
-                      selectedDateTime = selectedDateTime.copyWith(
-                        hour: timeOfDay.hour,
-                        minute: timeOfDay.minute,
-                      );
-                      context.read<ExpenseBloc>().selectedDate =
-                          selectedDateTime;
-                          print(context.read<ExpenseBloc>().selectedDate);
-                    });
+                    final newDateTime = DateTime(
+                      context.read<ExpenseBloc>().state.selectedDateTime.year,
+                      context.read<ExpenseBloc>().state.selectedDateTime.month,
+                      context.read<ExpenseBloc>().state.selectedDateTime.day,
+                      timeOfDay.hour,
+                      timeOfDay.minute,
+                    );
+                    context.read<ExpenseBloc>().add(
+                        ExpenseEvent.updateSelectedDate(
+                            selectedDateTime: newDateTime));
                   }
                 },
                 leading: Icon(
                   MdiIcons.clockOutline,
-                  // color: context.secondary,
                 ),
                 title: Text(
-                  selectedDateTime.formattedTime,
-                  style: getTextTheme(context).bodyMedium,
+                  context
+                      .watch<ExpenseBloc>()
+                      .state
+                      .selectedDateTime
+                      .formattedTime,
+                  style: Theme.of(context).textTheme.bodyMedium,
                 ),
               ),
             ),

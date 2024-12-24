@@ -16,7 +16,7 @@ void main() async {
   final dbHelper = ExpenseDBHelper();
   await dbHelper.initDB();
 
-    await Firebase.initializeApp(
+  await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
@@ -30,7 +30,6 @@ void main() async {
     "Daily Expense Reminder",
     "Don't forget to log your expenses today!",
   );
-  
 
   runApp(ExpenseMateApp(dbHelper: dbHelper));
 }
@@ -43,7 +42,8 @@ class ExpenseMateApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ExpenseBloc(dbHelper)..add(LoadExpenses()),
+      create: (context) =>
+          ExpenseBloc(dbHelper)..add(const ExpenseEvent.fetchExpenses()),
       child: MaterialApp.router(
         title: 'ExpenseMate',
         theme: lightTheme,
@@ -53,6 +53,3 @@ class ExpenseMateApp extends StatelessWidget {
     );
   }
 }
-
-
-

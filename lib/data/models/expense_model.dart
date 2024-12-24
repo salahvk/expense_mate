@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:expense_mate/core/enum/payment_type.dart';
 
 // Entity for domain layer
 class ExpenseModel extends Equatable {
@@ -6,12 +7,14 @@ class ExpenseModel extends Equatable {
   final String name;
   final double amount;
   final DateTime date;
+  final PaymentType? paymentType;
 
   const ExpenseModel({
     this.id,
     required this.name,
     required this.amount,
     required this.date,
+    required this.paymentType
   });
 
   // Convert model to Map (for database insertion)
@@ -21,6 +24,7 @@ class ExpenseModel extends Equatable {
       'name': name,
       'amount': amount,
       'date': date.toIso8601String(),
+      'paymentType': paymentType?.index
     };
   }
 
@@ -31,9 +35,10 @@ class ExpenseModel extends Equatable {
       name: map['name'],
       amount: map['amount'],
       date: DateTime.parse(map['date']),
+      paymentType: PaymentType.values[map['paymentType']] 
     );
   }
 
   @override
-  List<Object?> get props => [id, name, amount, date];
+  List<Object?> get props => [id, name, amount, date,paymentType];
 }

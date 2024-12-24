@@ -28,22 +28,18 @@ class HomeScreen extends StatelessWidget {
       ),
       body: BlocBuilder<ExpenseBloc, ExpenseState>(
         builder: (context, state) {
-          if (state is ExpenseLoading) {
+          if (state.isLoading) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state is ExpenseLoaded) {
+          } else if (state.expenses.isNotEmpty) {
             final expenses = state.expenses;
-
-            if (expenses.isEmpty) {
-              return const Center(child: Text("No expenses found"));
-            }
 
             return ListView(children: [
               const ExpenseSummaryCard(),
               const SelectableButtonRow(),
               ExpenseHistory(expenses: expenses),
             ]);
-          } else if (state is ExpenseError) {
-            return Center(child: Text(state.message));
+          } else if (state.errorMessage != null) {
+            return Center(child: Text(state.errorMessage!));
           }
 
           return const Center(child: Text("No data"));
@@ -61,12 +57,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-// import 'package:flutter/material.dart';
-
-
-
-
-
-
-
