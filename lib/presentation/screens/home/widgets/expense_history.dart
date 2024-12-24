@@ -2,9 +2,10 @@ import 'package:expense_mate/core/enum/payment_type.dart';
 import 'package:expense_mate/core/extension/time_extension.dart';
 import 'package:expense_mate/core/utilities/getters/get_texttheme.dart';
 import 'package:expense_mate/data/models/expense_model.dart';
+import 'package:expense_mate/presentation/bloc/expense_bloc.dart';
 import 'package:expense_mate/presentation/screens/add_expense/add_expense_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ExpenseHistory extends StatelessWidget {
   const ExpenseHistory({
@@ -16,55 +17,81 @@ class ExpenseHistory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap:
-          true, // Makes the ListView non-scrollable if it's inside another scrollable widget
-      physics:
-          const NeverScrollableScrollPhysics(), // Prevent scrolling of this list inside a ScrollView
-      itemCount: expenses.length,
-      itemBuilder: (context, index) {
-        final expense = expenses[index];
+    // Track already displayed dates
+    final Set<String> displayedHeaders = {};
 
-        return ListTile(
-          leading: CircleAvatar(
-            child: Icon(expense.paymentType?.displayIcon),
-          ),
-          trailing: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                "\$${expense.amount.toStringAsFixed(2)}",
-                style: getTextTheme(context).bodyMedium,
-              ),
-              Text(
-                expense.date.justTime,
-              ),
-            ],
-          ),
-          title:
-              Text("${expense.name} - ${expense.date.toLocal()}".split(' ')[0]),
-          // trailing: IconButton(
-          //   icon: const Icon(Icons.delete),
-          //   onPressed: () {
-          //     context
-          //         .read<ExpenseBloc>()
-          //         .add(DeleteExpense(expense.id ?? 0));
-          //   },
-          // ),
-          subtitle: Row(
-            children: [
-              Text(expense.date.toReadable),
-            ],
-          ),
+    return BlocBuilder<ExpenseBloc, ExpenseState>(
+      builder: (context, state) {
+        return ListView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          itemCount: expenses.length,
+          itemBuilder: (context, index) {
+            final expense = expenses[index];
 
-          onTap: () {
-            // Navigate to edit screen
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => const AddExpenseScreen(),
-              ),
+            // Get formatted date header (e.g., "Tue 24 Dec")
+            final String dateHeader = state.selectedButtonIndex == 0
+                ? expense.date.toReadable
+                : state.selectedButtonIndex == 1
+                    ? expense.date.toWeeklyReadable
+                    : expense.date.monthString;
+
+            // Check if this header has already been displayed
+            final bool shouldShowHeader =
+                !displayedHeaders.contains(dateHeader);
+
+            if (shouldShowHeader) {
+              // Add the date to the displayed set
+              displayedHeaders.add(dateHeader);
+            }
+
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Show header only if it hasn't been displayed before
+                if (shouldShowHeader)
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10, top: 10),
+                    child: Text(
+                      dateHeader,
+                      style: getTextTheme(context).titleMedium,
+                    ),
+                  ),
+                ListTile(
+                  leading: CircleAvatar(
+                    child: Icon(expense.paymentType?.displayIcon),
+                  ),
+                  trailing: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        "\$${expense.amount.toStringAsFixed(2)}",
+                        style: getTextTheme(context).bodyMedium,
+                      ),
+                      Text(
+                        expense.date.justTime,
+                      ),
+                    ],
+                  ),
+                  title: Text(
+                    "${expense.name} - ${expense.date.toLocal()}".split(' ')[0],
+                  ),
+                  subtitle: Row(
+                    children: [
+                      Text(expense.date.toReadable),
+                    ],
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const AddExpenseScreen(),
+                      ),
+                    );
+                  },
+                ),
+              ],
             );
           },
         );

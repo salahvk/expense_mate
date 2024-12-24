@@ -1,77 +1,92 @@
+import 'package:expense_mate/presentation/bloc/expense_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ExpenseSummaryCard extends StatelessWidget {
-  final double totalCash = 150.0;  // Example data
-  final double totalBank = 200.0;  // Example data
-  final double totalExpenses = 350.0;
-
-  const ExpenseSummaryCard({super.key});  // Example data
+class ExpenseSummaryCard extends StatefulWidget {
+  const ExpenseSummaryCard({super.key});
 
   @override
+  State<ExpenseSummaryCard> createState() => _ExpenseSummaryCardState();
+}
+
+class _ExpenseSummaryCardState extends State<ExpenseSummaryCard> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    context.read<ExpenseBloc>().add(const ExpenseEvent.updateSelectedIndex(0));
+  }
+  @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 8,
-      margin: const EdgeInsets.all(16),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Title section
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return BlocBuilder<ExpenseBloc, ExpenseState>(
+      builder: (context, state) {
+        return Card(
+          elevation: 8,
+          margin: const EdgeInsets.all(16),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  'Expense Summary',
-                  style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.bold),
-                ),
-                const Icon(
-                  Icons.trending_up,
-                  color: Colors.green,
-                  size: 30,
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-
-            // Expense breakdown section
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _buildSummaryCard(
-                  context,
-                  'Cash',
-                  totalCash,
-                  Icons.money,
-                  Colors.green.shade300,
-                ),
-                _buildSummaryCard(
-                  context,
-                  'Bank',
-                  totalBank,
-                  Icons.account_balance,
-                  Colors.blue.shade300,
-                ),
-              ],
-            ),
-            const SizedBox(height: 12),
-
-            // Total expenses section
-            Center(
-              child: Text(
-                'Total Expenses: \$${totalExpenses.toStringAsFixed(2)}',
-                style: Theme.of(context).textTheme.headlineLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.deepOrangeAccent,
+                // Title section
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Expense Summary',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineLarge
+                          ?.copyWith(fontWeight: FontWeight.bold),
                     ),
-              ),
+                    const Icon(
+                      Icons.trending_up,
+                      color: Colors.green,
+                      size: 30,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+
+                // Expense breakdown section
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _buildSummaryCard(
+                      context,
+                      'Cash',
+                      state.cashTotal,
+                      Icons.money,
+                      Colors.green.shade300,
+                    ),
+                    _buildSummaryCard(
+                      context,
+                      'Bank',
+                      state.bankTotal,
+                      Icons.account_balance,
+                      Colors.blue.shade300,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+
+                // Total expenses section
+                Center(
+                  child: Text(
+                    'Total Expenses: \$${(state.bankTotal + state.cashTotal).toStringAsFixed(2)}',
+                    style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.deepOrangeAccent,
+                        ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
   }
 
@@ -116,5 +131,3 @@ class ExpenseSummaryCard extends StatelessWidget {
     );
   }
 }
-
-

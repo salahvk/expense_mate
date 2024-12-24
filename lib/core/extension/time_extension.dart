@@ -2,12 +2,24 @@ import 'package:expense_mate/core/enum/calendar_formats.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-
 extension DateUtils on DateTime {
   String get toReadable => DateFormat('EEE dd MMM').format(this);
 
+  // Format for weekly
+  String get toWeeklyReadable {
+    // Calculate the week number
+    int weekNumber = ((dayOfYear - weekday + 10) / 7).floor();
+    return 'Week $weekNumber of $year';
+  }
+
+  // Get the day of the year
+  int get dayOfYear {
+    return int.parse(DateFormat("D").format(this)); // Requires 'intl' package
+  }
+
   String get formattedDate {
-    final selectedCalendarFormat = CalendarFormats.values[CalendarFormats.ddmmyyyy.index];
+    final selectedCalendarFormat =
+        CalendarFormats.values[CalendarFormats.ddmmyyyy.index];
     return selectedCalendarFormat.dateFormat.format(this);
   }
 

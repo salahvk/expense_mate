@@ -25,6 +25,7 @@ mixin _$ExpenseEvent {
     required TResult Function() clearExpenses,
     required TResult Function(DateTime selectedDateTime) updateSelectedDate,
     required TResult Function(PaymentType paymentType) updatePaymentType,
+    required TResult Function(int index) updateSelectedIndex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -36,6 +37,7 @@ mixin _$ExpenseEvent {
     TResult? Function()? clearExpenses,
     TResult? Function(DateTime selectedDateTime)? updateSelectedDate,
     TResult? Function(PaymentType paymentType)? updatePaymentType,
+    TResult? Function(int index)? updateSelectedIndex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -47,6 +49,7 @@ mixin _$ExpenseEvent {
     TResult Function()? clearExpenses,
     TResult Function(DateTime selectedDateTime)? updateSelectedDate,
     TResult Function(PaymentType paymentType)? updatePaymentType,
+    TResult Function(int index)? updateSelectedIndex,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -59,6 +62,7 @@ mixin _$ExpenseEvent {
     required TResult Function(ClearExpenses value) clearExpenses,
     required TResult Function(UpdateSelectedDate value) updateSelectedDate,
     required TResult Function(UpdatePaymentTypeEvent value) updatePaymentType,
+    required TResult Function(UpdateSelectedIndex value) updateSelectedIndex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -70,6 +74,7 @@ mixin _$ExpenseEvent {
     TResult? Function(ClearExpenses value)? clearExpenses,
     TResult? Function(UpdateSelectedDate value)? updateSelectedDate,
     TResult? Function(UpdatePaymentTypeEvent value)? updatePaymentType,
+    TResult? Function(UpdateSelectedIndex value)? updateSelectedIndex,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,6 +86,7 @@ mixin _$ExpenseEvent {
     TResult Function(ClearExpenses value)? clearExpenses,
     TResult Function(UpdateSelectedDate value)? updateSelectedDate,
     TResult Function(UpdatePaymentTypeEvent value)? updatePaymentType,
+    TResult Function(UpdateSelectedIndex value)? updateSelectedIndex,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -182,6 +188,7 @@ class _$AddExpenseImpl implements AddExpense {
     required TResult Function() clearExpenses,
     required TResult Function(DateTime selectedDateTime) updateSelectedDate,
     required TResult Function(PaymentType paymentType) updatePaymentType,
+    required TResult Function(int index) updateSelectedIndex,
   }) {
     return addExpense(expense);
   }
@@ -196,6 +203,7 @@ class _$AddExpenseImpl implements AddExpense {
     TResult? Function()? clearExpenses,
     TResult? Function(DateTime selectedDateTime)? updateSelectedDate,
     TResult? Function(PaymentType paymentType)? updatePaymentType,
+    TResult? Function(int index)? updateSelectedIndex,
   }) {
     return addExpense?.call(expense);
   }
@@ -210,6 +218,7 @@ class _$AddExpenseImpl implements AddExpense {
     TResult Function()? clearExpenses,
     TResult Function(DateTime selectedDateTime)? updateSelectedDate,
     TResult Function(PaymentType paymentType)? updatePaymentType,
+    TResult Function(int index)? updateSelectedIndex,
     required TResult orElse(),
   }) {
     if (addExpense != null) {
@@ -228,6 +237,7 @@ class _$AddExpenseImpl implements AddExpense {
     required TResult Function(ClearExpenses value) clearExpenses,
     required TResult Function(UpdateSelectedDate value) updateSelectedDate,
     required TResult Function(UpdatePaymentTypeEvent value) updatePaymentType,
+    required TResult Function(UpdateSelectedIndex value) updateSelectedIndex,
   }) {
     return addExpense(this);
   }
@@ -242,6 +252,7 @@ class _$AddExpenseImpl implements AddExpense {
     TResult? Function(ClearExpenses value)? clearExpenses,
     TResult? Function(UpdateSelectedDate value)? updateSelectedDate,
     TResult? Function(UpdatePaymentTypeEvent value)? updatePaymentType,
+    TResult? Function(UpdateSelectedIndex value)? updateSelectedIndex,
   }) {
     return addExpense?.call(this);
   }
@@ -256,6 +267,7 @@ class _$AddExpenseImpl implements AddExpense {
     TResult Function(ClearExpenses value)? clearExpenses,
     TResult Function(UpdateSelectedDate value)? updateSelectedDate,
     TResult Function(UpdatePaymentTypeEvent value)? updatePaymentType,
+    TResult Function(UpdateSelectedIndex value)? updateSelectedIndex,
     required TResult orElse(),
   }) {
     if (addExpense != null) {
@@ -354,6 +366,7 @@ class _$DeleteExpenseImpl implements DeleteExpense {
     required TResult Function() clearExpenses,
     required TResult Function(DateTime selectedDateTime) updateSelectedDate,
     required TResult Function(PaymentType paymentType) updatePaymentType,
+    required TResult Function(int index) updateSelectedIndex,
   }) {
     return deleteExpense(expenseId);
   }
@@ -368,6 +381,7 @@ class _$DeleteExpenseImpl implements DeleteExpense {
     TResult? Function()? clearExpenses,
     TResult? Function(DateTime selectedDateTime)? updateSelectedDate,
     TResult? Function(PaymentType paymentType)? updatePaymentType,
+    TResult? Function(int index)? updateSelectedIndex,
   }) {
     return deleteExpense?.call(expenseId);
   }
@@ -382,6 +396,7 @@ class _$DeleteExpenseImpl implements DeleteExpense {
     TResult Function()? clearExpenses,
     TResult Function(DateTime selectedDateTime)? updateSelectedDate,
     TResult Function(PaymentType paymentType)? updatePaymentType,
+    TResult Function(int index)? updateSelectedIndex,
     required TResult orElse(),
   }) {
     if (deleteExpense != null) {
@@ -400,6 +415,7 @@ class _$DeleteExpenseImpl implements DeleteExpense {
     required TResult Function(ClearExpenses value) clearExpenses,
     required TResult Function(UpdateSelectedDate value) updateSelectedDate,
     required TResult Function(UpdatePaymentTypeEvent value) updatePaymentType,
+    required TResult Function(UpdateSelectedIndex value) updateSelectedIndex,
   }) {
     return deleteExpense(this);
   }
@@ -414,6 +430,7 @@ class _$DeleteExpenseImpl implements DeleteExpense {
     TResult? Function(ClearExpenses value)? clearExpenses,
     TResult? Function(UpdateSelectedDate value)? updateSelectedDate,
     TResult? Function(UpdatePaymentTypeEvent value)? updatePaymentType,
+    TResult? Function(UpdateSelectedIndex value)? updateSelectedIndex,
   }) {
     return deleteExpense?.call(this);
   }
@@ -428,6 +445,7 @@ class _$DeleteExpenseImpl implements DeleteExpense {
     TResult Function(ClearExpenses value)? clearExpenses,
     TResult Function(UpdateSelectedDate value)? updateSelectedDate,
     TResult Function(UpdatePaymentTypeEvent value)? updatePaymentType,
+    TResult Function(UpdateSelectedIndex value)? updateSelectedIndex,
     required TResult orElse(),
   }) {
     if (deleteExpense != null) {
@@ -525,6 +543,7 @@ class _$UpdateExpenseImpl implements UpdateExpense {
     required TResult Function() clearExpenses,
     required TResult Function(DateTime selectedDateTime) updateSelectedDate,
     required TResult Function(PaymentType paymentType) updatePaymentType,
+    required TResult Function(int index) updateSelectedIndex,
   }) {
     return updateExpense(expense);
   }
@@ -539,6 +558,7 @@ class _$UpdateExpenseImpl implements UpdateExpense {
     TResult? Function()? clearExpenses,
     TResult? Function(DateTime selectedDateTime)? updateSelectedDate,
     TResult? Function(PaymentType paymentType)? updatePaymentType,
+    TResult? Function(int index)? updateSelectedIndex,
   }) {
     return updateExpense?.call(expense);
   }
@@ -553,6 +573,7 @@ class _$UpdateExpenseImpl implements UpdateExpense {
     TResult Function()? clearExpenses,
     TResult Function(DateTime selectedDateTime)? updateSelectedDate,
     TResult Function(PaymentType paymentType)? updatePaymentType,
+    TResult Function(int index)? updateSelectedIndex,
     required TResult orElse(),
   }) {
     if (updateExpense != null) {
@@ -571,6 +592,7 @@ class _$UpdateExpenseImpl implements UpdateExpense {
     required TResult Function(ClearExpenses value) clearExpenses,
     required TResult Function(UpdateSelectedDate value) updateSelectedDate,
     required TResult Function(UpdatePaymentTypeEvent value) updatePaymentType,
+    required TResult Function(UpdateSelectedIndex value) updateSelectedIndex,
   }) {
     return updateExpense(this);
   }
@@ -585,6 +607,7 @@ class _$UpdateExpenseImpl implements UpdateExpense {
     TResult? Function(ClearExpenses value)? clearExpenses,
     TResult? Function(UpdateSelectedDate value)? updateSelectedDate,
     TResult? Function(UpdatePaymentTypeEvent value)? updatePaymentType,
+    TResult? Function(UpdateSelectedIndex value)? updateSelectedIndex,
   }) {
     return updateExpense?.call(this);
   }
@@ -599,6 +622,7 @@ class _$UpdateExpenseImpl implements UpdateExpense {
     TResult Function(ClearExpenses value)? clearExpenses,
     TResult Function(UpdateSelectedDate value)? updateSelectedDate,
     TResult Function(UpdatePaymentTypeEvent value)? updatePaymentType,
+    TResult Function(UpdateSelectedIndex value)? updateSelectedIndex,
     required TResult orElse(),
   }) {
     if (updateExpense != null) {
@@ -669,6 +693,7 @@ class _$FetchExpensesImpl implements FetchExpenses {
     required TResult Function() clearExpenses,
     required TResult Function(DateTime selectedDateTime) updateSelectedDate,
     required TResult Function(PaymentType paymentType) updatePaymentType,
+    required TResult Function(int index) updateSelectedIndex,
   }) {
     return fetchExpenses();
   }
@@ -683,6 +708,7 @@ class _$FetchExpensesImpl implements FetchExpenses {
     TResult? Function()? clearExpenses,
     TResult? Function(DateTime selectedDateTime)? updateSelectedDate,
     TResult? Function(PaymentType paymentType)? updatePaymentType,
+    TResult? Function(int index)? updateSelectedIndex,
   }) {
     return fetchExpenses?.call();
   }
@@ -697,6 +723,7 @@ class _$FetchExpensesImpl implements FetchExpenses {
     TResult Function()? clearExpenses,
     TResult Function(DateTime selectedDateTime)? updateSelectedDate,
     TResult Function(PaymentType paymentType)? updatePaymentType,
+    TResult Function(int index)? updateSelectedIndex,
     required TResult orElse(),
   }) {
     if (fetchExpenses != null) {
@@ -715,6 +742,7 @@ class _$FetchExpensesImpl implements FetchExpenses {
     required TResult Function(ClearExpenses value) clearExpenses,
     required TResult Function(UpdateSelectedDate value) updateSelectedDate,
     required TResult Function(UpdatePaymentTypeEvent value) updatePaymentType,
+    required TResult Function(UpdateSelectedIndex value) updateSelectedIndex,
   }) {
     return fetchExpenses(this);
   }
@@ -729,6 +757,7 @@ class _$FetchExpensesImpl implements FetchExpenses {
     TResult? Function(ClearExpenses value)? clearExpenses,
     TResult? Function(UpdateSelectedDate value)? updateSelectedDate,
     TResult? Function(UpdatePaymentTypeEvent value)? updatePaymentType,
+    TResult? Function(UpdateSelectedIndex value)? updateSelectedIndex,
   }) {
     return fetchExpenses?.call(this);
   }
@@ -743,6 +772,7 @@ class _$FetchExpensesImpl implements FetchExpenses {
     TResult Function(ClearExpenses value)? clearExpenses,
     TResult Function(UpdateSelectedDate value)? updateSelectedDate,
     TResult Function(UpdatePaymentTypeEvent value)? updatePaymentType,
+    TResult Function(UpdateSelectedIndex value)? updateSelectedIndex,
     required TResult orElse(),
   }) {
     if (fetchExpenses != null) {
@@ -804,6 +834,7 @@ class _$ClearExpensesImpl implements ClearExpenses {
     required TResult Function() clearExpenses,
     required TResult Function(DateTime selectedDateTime) updateSelectedDate,
     required TResult Function(PaymentType paymentType) updatePaymentType,
+    required TResult Function(int index) updateSelectedIndex,
   }) {
     return clearExpenses();
   }
@@ -818,6 +849,7 @@ class _$ClearExpensesImpl implements ClearExpenses {
     TResult? Function()? clearExpenses,
     TResult? Function(DateTime selectedDateTime)? updateSelectedDate,
     TResult? Function(PaymentType paymentType)? updatePaymentType,
+    TResult? Function(int index)? updateSelectedIndex,
   }) {
     return clearExpenses?.call();
   }
@@ -832,6 +864,7 @@ class _$ClearExpensesImpl implements ClearExpenses {
     TResult Function()? clearExpenses,
     TResult Function(DateTime selectedDateTime)? updateSelectedDate,
     TResult Function(PaymentType paymentType)? updatePaymentType,
+    TResult Function(int index)? updateSelectedIndex,
     required TResult orElse(),
   }) {
     if (clearExpenses != null) {
@@ -850,6 +883,7 @@ class _$ClearExpensesImpl implements ClearExpenses {
     required TResult Function(ClearExpenses value) clearExpenses,
     required TResult Function(UpdateSelectedDate value) updateSelectedDate,
     required TResult Function(UpdatePaymentTypeEvent value) updatePaymentType,
+    required TResult Function(UpdateSelectedIndex value) updateSelectedIndex,
   }) {
     return clearExpenses(this);
   }
@@ -864,6 +898,7 @@ class _$ClearExpensesImpl implements ClearExpenses {
     TResult? Function(ClearExpenses value)? clearExpenses,
     TResult? Function(UpdateSelectedDate value)? updateSelectedDate,
     TResult? Function(UpdatePaymentTypeEvent value)? updatePaymentType,
+    TResult? Function(UpdateSelectedIndex value)? updateSelectedIndex,
   }) {
     return clearExpenses?.call(this);
   }
@@ -878,6 +913,7 @@ class _$ClearExpensesImpl implements ClearExpenses {
     TResult Function(ClearExpenses value)? clearExpenses,
     TResult Function(UpdateSelectedDate value)? updateSelectedDate,
     TResult Function(UpdatePaymentTypeEvent value)? updatePaymentType,
+    TResult Function(UpdateSelectedIndex value)? updateSelectedIndex,
     required TResult orElse(),
   }) {
     if (clearExpenses != null) {
@@ -968,6 +1004,7 @@ class _$UpdateSelectedDateImpl implements UpdateSelectedDate {
     required TResult Function() clearExpenses,
     required TResult Function(DateTime selectedDateTime) updateSelectedDate,
     required TResult Function(PaymentType paymentType) updatePaymentType,
+    required TResult Function(int index) updateSelectedIndex,
   }) {
     return updateSelectedDate(selectedDateTime);
   }
@@ -982,6 +1019,7 @@ class _$UpdateSelectedDateImpl implements UpdateSelectedDate {
     TResult? Function()? clearExpenses,
     TResult? Function(DateTime selectedDateTime)? updateSelectedDate,
     TResult? Function(PaymentType paymentType)? updatePaymentType,
+    TResult? Function(int index)? updateSelectedIndex,
   }) {
     return updateSelectedDate?.call(selectedDateTime);
   }
@@ -996,6 +1034,7 @@ class _$UpdateSelectedDateImpl implements UpdateSelectedDate {
     TResult Function()? clearExpenses,
     TResult Function(DateTime selectedDateTime)? updateSelectedDate,
     TResult Function(PaymentType paymentType)? updatePaymentType,
+    TResult Function(int index)? updateSelectedIndex,
     required TResult orElse(),
   }) {
     if (updateSelectedDate != null) {
@@ -1014,6 +1053,7 @@ class _$UpdateSelectedDateImpl implements UpdateSelectedDate {
     required TResult Function(ClearExpenses value) clearExpenses,
     required TResult Function(UpdateSelectedDate value) updateSelectedDate,
     required TResult Function(UpdatePaymentTypeEvent value) updatePaymentType,
+    required TResult Function(UpdateSelectedIndex value) updateSelectedIndex,
   }) {
     return updateSelectedDate(this);
   }
@@ -1028,6 +1068,7 @@ class _$UpdateSelectedDateImpl implements UpdateSelectedDate {
     TResult? Function(ClearExpenses value)? clearExpenses,
     TResult? Function(UpdateSelectedDate value)? updateSelectedDate,
     TResult? Function(UpdatePaymentTypeEvent value)? updatePaymentType,
+    TResult? Function(UpdateSelectedIndex value)? updateSelectedIndex,
   }) {
     return updateSelectedDate?.call(this);
   }
@@ -1042,6 +1083,7 @@ class _$UpdateSelectedDateImpl implements UpdateSelectedDate {
     TResult Function(ClearExpenses value)? clearExpenses,
     TResult Function(UpdateSelectedDate value)? updateSelectedDate,
     TResult Function(UpdatePaymentTypeEvent value)? updatePaymentType,
+    TResult Function(UpdateSelectedIndex value)? updateSelectedIndex,
     required TResult orElse(),
   }) {
     if (updateSelectedDate != null) {
@@ -1143,6 +1185,7 @@ class _$UpdatePaymentTypeEventImpl implements UpdatePaymentTypeEvent {
     required TResult Function() clearExpenses,
     required TResult Function(DateTime selectedDateTime) updateSelectedDate,
     required TResult Function(PaymentType paymentType) updatePaymentType,
+    required TResult Function(int index) updateSelectedIndex,
   }) {
     return updatePaymentType(paymentType);
   }
@@ -1157,6 +1200,7 @@ class _$UpdatePaymentTypeEventImpl implements UpdatePaymentTypeEvent {
     TResult? Function()? clearExpenses,
     TResult? Function(DateTime selectedDateTime)? updateSelectedDate,
     TResult? Function(PaymentType paymentType)? updatePaymentType,
+    TResult? Function(int index)? updateSelectedIndex,
   }) {
     return updatePaymentType?.call(paymentType);
   }
@@ -1171,6 +1215,7 @@ class _$UpdatePaymentTypeEventImpl implements UpdatePaymentTypeEvent {
     TResult Function()? clearExpenses,
     TResult Function(DateTime selectedDateTime)? updateSelectedDate,
     TResult Function(PaymentType paymentType)? updatePaymentType,
+    TResult Function(int index)? updateSelectedIndex,
     required TResult orElse(),
   }) {
     if (updatePaymentType != null) {
@@ -1189,6 +1234,7 @@ class _$UpdatePaymentTypeEventImpl implements UpdatePaymentTypeEvent {
     required TResult Function(ClearExpenses value) clearExpenses,
     required TResult Function(UpdateSelectedDate value) updateSelectedDate,
     required TResult Function(UpdatePaymentTypeEvent value) updatePaymentType,
+    required TResult Function(UpdateSelectedIndex value) updateSelectedIndex,
   }) {
     return updatePaymentType(this);
   }
@@ -1203,6 +1249,7 @@ class _$UpdatePaymentTypeEventImpl implements UpdatePaymentTypeEvent {
     TResult? Function(ClearExpenses value)? clearExpenses,
     TResult? Function(UpdateSelectedDate value)? updateSelectedDate,
     TResult? Function(UpdatePaymentTypeEvent value)? updatePaymentType,
+    TResult? Function(UpdateSelectedIndex value)? updateSelectedIndex,
   }) {
     return updatePaymentType?.call(this);
   }
@@ -1217,6 +1264,7 @@ class _$UpdatePaymentTypeEventImpl implements UpdatePaymentTypeEvent {
     TResult Function(ClearExpenses value)? clearExpenses,
     TResult Function(UpdateSelectedDate value)? updateSelectedDate,
     TResult Function(UpdatePaymentTypeEvent value)? updatePaymentType,
+    TResult Function(UpdateSelectedIndex value)? updateSelectedIndex,
     required TResult orElse(),
   }) {
     if (updatePaymentType != null) {
@@ -1240,12 +1288,193 @@ abstract class UpdatePaymentTypeEvent implements ExpenseEvent {
 }
 
 /// @nodoc
+abstract class _$$UpdateSelectedIndexImplCopyWith<$Res> {
+  factory _$$UpdateSelectedIndexImplCopyWith(_$UpdateSelectedIndexImpl value,
+          $Res Function(_$UpdateSelectedIndexImpl) then) =
+      __$$UpdateSelectedIndexImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int index});
+}
+
+/// @nodoc
+class __$$UpdateSelectedIndexImplCopyWithImpl<$Res>
+    extends _$ExpenseEventCopyWithImpl<$Res, _$UpdateSelectedIndexImpl>
+    implements _$$UpdateSelectedIndexImplCopyWith<$Res> {
+  __$$UpdateSelectedIndexImplCopyWithImpl(_$UpdateSelectedIndexImpl _value,
+      $Res Function(_$UpdateSelectedIndexImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ExpenseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? index = null,
+  }) {
+    return _then(_$UpdateSelectedIndexImpl(
+      null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateSelectedIndexImpl implements UpdateSelectedIndex {
+  const _$UpdateSelectedIndexImpl(this.index);
+
+  @override
+  final int index;
+
+  @override
+  String toString() {
+    return 'ExpenseEvent.updateSelectedIndex(index: $index)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$UpdateSelectedIndexImpl &&
+            (identical(other.index, index) || other.index == index));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, index);
+
+  /// Create a copy of ExpenseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateSelectedIndexImplCopyWith<_$UpdateSelectedIndexImpl> get copyWith =>
+      __$$UpdateSelectedIndexImplCopyWithImpl<_$UpdateSelectedIndexImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(ExpenseModel expense) addExpense,
+    required TResult Function(int expenseId) deleteExpense,
+    required TResult Function(ExpenseModel expense) updateExpense,
+    required TResult Function() fetchExpenses,
+    required TResult Function() clearExpenses,
+    required TResult Function(DateTime selectedDateTime) updateSelectedDate,
+    required TResult Function(PaymentType paymentType) updatePaymentType,
+    required TResult Function(int index) updateSelectedIndex,
+  }) {
+    return updateSelectedIndex(index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(ExpenseModel expense)? addExpense,
+    TResult? Function(int expenseId)? deleteExpense,
+    TResult? Function(ExpenseModel expense)? updateExpense,
+    TResult? Function()? fetchExpenses,
+    TResult? Function()? clearExpenses,
+    TResult? Function(DateTime selectedDateTime)? updateSelectedDate,
+    TResult? Function(PaymentType paymentType)? updatePaymentType,
+    TResult? Function(int index)? updateSelectedIndex,
+  }) {
+    return updateSelectedIndex?.call(index);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(ExpenseModel expense)? addExpense,
+    TResult Function(int expenseId)? deleteExpense,
+    TResult Function(ExpenseModel expense)? updateExpense,
+    TResult Function()? fetchExpenses,
+    TResult Function()? clearExpenses,
+    TResult Function(DateTime selectedDateTime)? updateSelectedDate,
+    TResult Function(PaymentType paymentType)? updatePaymentType,
+    TResult Function(int index)? updateSelectedIndex,
+    required TResult orElse(),
+  }) {
+    if (updateSelectedIndex != null) {
+      return updateSelectedIndex(index);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AddExpense value) addExpense,
+    required TResult Function(DeleteExpense value) deleteExpense,
+    required TResult Function(UpdateExpense value) updateExpense,
+    required TResult Function(FetchExpenses value) fetchExpenses,
+    required TResult Function(ClearExpenses value) clearExpenses,
+    required TResult Function(UpdateSelectedDate value) updateSelectedDate,
+    required TResult Function(UpdatePaymentTypeEvent value) updatePaymentType,
+    required TResult Function(UpdateSelectedIndex value) updateSelectedIndex,
+  }) {
+    return updateSelectedIndex(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AddExpense value)? addExpense,
+    TResult? Function(DeleteExpense value)? deleteExpense,
+    TResult? Function(UpdateExpense value)? updateExpense,
+    TResult? Function(FetchExpenses value)? fetchExpenses,
+    TResult? Function(ClearExpenses value)? clearExpenses,
+    TResult? Function(UpdateSelectedDate value)? updateSelectedDate,
+    TResult? Function(UpdatePaymentTypeEvent value)? updatePaymentType,
+    TResult? Function(UpdateSelectedIndex value)? updateSelectedIndex,
+  }) {
+    return updateSelectedIndex?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AddExpense value)? addExpense,
+    TResult Function(DeleteExpense value)? deleteExpense,
+    TResult Function(UpdateExpense value)? updateExpense,
+    TResult Function(FetchExpenses value)? fetchExpenses,
+    TResult Function(ClearExpenses value)? clearExpenses,
+    TResult Function(UpdateSelectedDate value)? updateSelectedDate,
+    TResult Function(UpdatePaymentTypeEvent value)? updatePaymentType,
+    TResult Function(UpdateSelectedIndex value)? updateSelectedIndex,
+    required TResult orElse(),
+  }) {
+    if (updateSelectedIndex != null) {
+      return updateSelectedIndex(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateSelectedIndex implements ExpenseEvent {
+  const factory UpdateSelectedIndex(final int index) =
+      _$UpdateSelectedIndexImpl;
+
+  int get index;
+
+  /// Create a copy of ExpenseEvent
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$UpdateSelectedIndexImplCopyWith<_$UpdateSelectedIndexImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$ExpenseState {
   bool get isLoading => throw _privateConstructorUsedError;
   List<ExpenseModel> get expenses => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
   DateTime get selectedDateTime => throw _privateConstructorUsedError;
   PaymentType get selectedPaymentType => throw _privateConstructorUsedError;
+  int get selectedButtonIndex => throw _privateConstructorUsedError;
+  double get cashTotal => throw _privateConstructorUsedError;
+  double get bankTotal => throw _privateConstructorUsedError;
 
   /// Create a copy of ExpenseState
   /// with the given fields replaced by the non-null parameter values.
@@ -1265,7 +1494,10 @@ abstract class $ExpenseStateCopyWith<$Res> {
       List<ExpenseModel> expenses,
       String? errorMessage,
       DateTime selectedDateTime,
-      PaymentType selectedPaymentType});
+      PaymentType selectedPaymentType,
+      int selectedButtonIndex,
+      double cashTotal,
+      double bankTotal});
 }
 
 /// @nodoc
@@ -1288,6 +1520,9 @@ class _$ExpenseStateCopyWithImpl<$Res, $Val extends ExpenseState>
     Object? errorMessage = freezed,
     Object? selectedDateTime = null,
     Object? selectedPaymentType = null,
+    Object? selectedButtonIndex = null,
+    Object? cashTotal = null,
+    Object? bankTotal = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -1310,6 +1545,18 @@ class _$ExpenseStateCopyWithImpl<$Res, $Val extends ExpenseState>
           ? _value.selectedPaymentType
           : selectedPaymentType // ignore: cast_nullable_to_non_nullable
               as PaymentType,
+      selectedButtonIndex: null == selectedButtonIndex
+          ? _value.selectedButtonIndex
+          : selectedButtonIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      cashTotal: null == cashTotal
+          ? _value.cashTotal
+          : cashTotal // ignore: cast_nullable_to_non_nullable
+              as double,
+      bankTotal: null == bankTotal
+          ? _value.bankTotal
+          : bankTotal // ignore: cast_nullable_to_non_nullable
+              as double,
     ) as $Val);
   }
 }
@@ -1327,7 +1574,10 @@ abstract class _$$ExpenseStateImplCopyWith<$Res>
       List<ExpenseModel> expenses,
       String? errorMessage,
       DateTime selectedDateTime,
-      PaymentType selectedPaymentType});
+      PaymentType selectedPaymentType,
+      int selectedButtonIndex,
+      double cashTotal,
+      double bankTotal});
 }
 
 /// @nodoc
@@ -1348,6 +1598,9 @@ class __$$ExpenseStateImplCopyWithImpl<$Res>
     Object? errorMessage = freezed,
     Object? selectedDateTime = null,
     Object? selectedPaymentType = null,
+    Object? selectedButtonIndex = null,
+    Object? cashTotal = null,
+    Object? bankTotal = null,
   }) {
     return _then(_$ExpenseStateImpl(
       isLoading: null == isLoading
@@ -1370,6 +1623,18 @@ class __$$ExpenseStateImplCopyWithImpl<$Res>
           ? _value.selectedPaymentType
           : selectedPaymentType // ignore: cast_nullable_to_non_nullable
               as PaymentType,
+      selectedButtonIndex: null == selectedButtonIndex
+          ? _value.selectedButtonIndex
+          : selectedButtonIndex // ignore: cast_nullable_to_non_nullable
+              as int,
+      cashTotal: null == cashTotal
+          ? _value.cashTotal
+          : cashTotal // ignore: cast_nullable_to_non_nullable
+              as double,
+      bankTotal: null == bankTotal
+          ? _value.bankTotal
+          : bankTotal // ignore: cast_nullable_to_non_nullable
+              as double,
     ));
   }
 }
@@ -1382,7 +1647,10 @@ class _$ExpenseStateImpl implements _ExpenseState {
       final List<ExpenseModel> expenses = const [],
       this.errorMessage,
       required this.selectedDateTime,
-      required this.selectedPaymentType})
+      required this.selectedPaymentType,
+      required this.selectedButtonIndex,
+      this.cashTotal = 0,
+      this.bankTotal = 0})
       : _expenses = expenses;
 
   @override
@@ -1403,10 +1671,18 @@ class _$ExpenseStateImpl implements _ExpenseState {
   final DateTime selectedDateTime;
   @override
   final PaymentType selectedPaymentType;
+  @override
+  final int selectedButtonIndex;
+  @override
+  @JsonKey()
+  final double cashTotal;
+  @override
+  @JsonKey()
+  final double bankTotal;
 
   @override
   String toString() {
-    return 'ExpenseState(isLoading: $isLoading, expenses: $expenses, errorMessage: $errorMessage, selectedDateTime: $selectedDateTime, selectedPaymentType: $selectedPaymentType)';
+    return 'ExpenseState(isLoading: $isLoading, expenses: $expenses, errorMessage: $errorMessage, selectedDateTime: $selectedDateTime, selectedPaymentType: $selectedPaymentType, selectedButtonIndex: $selectedButtonIndex, cashTotal: $cashTotal, bankTotal: $bankTotal)';
   }
 
   @override
@@ -1422,7 +1698,13 @@ class _$ExpenseStateImpl implements _ExpenseState {
             (identical(other.selectedDateTime, selectedDateTime) ||
                 other.selectedDateTime == selectedDateTime) &&
             (identical(other.selectedPaymentType, selectedPaymentType) ||
-                other.selectedPaymentType == selectedPaymentType));
+                other.selectedPaymentType == selectedPaymentType) &&
+            (identical(other.selectedButtonIndex, selectedButtonIndex) ||
+                other.selectedButtonIndex == selectedButtonIndex) &&
+            (identical(other.cashTotal, cashTotal) ||
+                other.cashTotal == cashTotal) &&
+            (identical(other.bankTotal, bankTotal) ||
+                other.bankTotal == bankTotal));
   }
 
   @override
@@ -1432,7 +1714,10 @@ class _$ExpenseStateImpl implements _ExpenseState {
       const DeepCollectionEquality().hash(_expenses),
       errorMessage,
       selectedDateTime,
-      selectedPaymentType);
+      selectedPaymentType,
+      selectedButtonIndex,
+      cashTotal,
+      bankTotal);
 
   /// Create a copy of ExpenseState
   /// with the given fields replaced by the non-null parameter values.
@@ -1449,7 +1734,10 @@ abstract class _ExpenseState implements ExpenseState {
       final List<ExpenseModel> expenses,
       final String? errorMessage,
       required final DateTime selectedDateTime,
-      required final PaymentType selectedPaymentType}) = _$ExpenseStateImpl;
+      required final PaymentType selectedPaymentType,
+      required final int selectedButtonIndex,
+      final double cashTotal,
+      final double bankTotal}) = _$ExpenseStateImpl;
 
   @override
   bool get isLoading;
@@ -1461,6 +1749,12 @@ abstract class _ExpenseState implements ExpenseState {
   DateTime get selectedDateTime;
   @override
   PaymentType get selectedPaymentType;
+  @override
+  int get selectedButtonIndex;
+  @override
+  double get cashTotal;
+  @override
+  double get bankTotal;
 
   /// Create a copy of ExpenseState
   /// with the given fields replaced by the non-null parameter values.

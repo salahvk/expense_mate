@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
             return ListView(children: [
               const ExpenseSummaryCard(),
               const SelectableButtonRow(),
-              ExpenseHistory(expenses: expenses),
+              ExpenseHistory(expenses: expenses,),
             ]);
           } else if (state.errorMessage != null) {
             return Center(child: Text(state.errorMessage!));

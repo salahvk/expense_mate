@@ -18,6 +18,7 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   ExpenseBloc(this.dbHelper) : super(ExpenseState.initial()) {
     on<UpdatePaymentTypeEvent>(_onUpdatePaymentType);
     on<UpdateSelectedDate>(_onUpdateSelectedDate);
+    on<UpdateSelectedIndex>(_onUpdateSelectedIndex);
     // Fetch Expenses
     on<FetchExpenses>((event, emit) async {
       emit(state.copyWith(isLoading: true));
@@ -86,5 +87,59 @@ class ExpenseBloc extends Bloc<ExpenseEvent, ExpenseState> {
   FutureOr<void> _onUpdateSelectedDate(
       UpdateSelectedDate event, Emitter<ExpenseState> emit) {
     emit(state.copyWith(selectedDateTime: event.selectedDateTime));
+  }
+
+  FutureOr<void> _onUpdateSelectedIndex(
+      UpdateSelectedIndex event, Emitter<ExpenseState> emit) {
+    // Get the current date
+    DateTime now = DateTime.now();
+
+    // Initialize totals
+    double cashTotal = 0;
+    double bankTotal = 0;
+
+    for (var expense in state.expenses) {
+      // Calculate for Daily
+      if (event.index == 0 &&
+          expense.date.year == now.year &&
+          expense.date.month == now.month &&
+          expense.date.day == now.day) {
+        if (expense.paymentType == PaymentType.cash) {
+          cashTotal += expense.amount;
+        } else if (expense.paymentType == PaymentType.bank) {
+          bankTotal += expense.amount;
+        }
+      }
+      // Calculate for Weekly
+      else if (event.index == 1) {
+        DateTime startOfWeek = now.subtract(Duration(days: now.weekday - 1));
+        DateTime endOfWeek = startOfWeek.add(const Duration(days: 6));
+
+        if (expense.date
+                .isAfter(startOfWeek.subtract(const Duration(days: 1))) &&
+            expense.date.isBefore(endOfWeek.add(const Duration(days: 1)))) {
+          if (expense.paymentType == PaymentType.cash) {
+            cashTotal += expense.amount;
+          } else if (expense.paymentType == PaymentType.bank) {
+            bankTotal += expense.amount;
+          }
+        }
+      }
+      // Calculate for Monthly
+      else if (event.index == 2 &&
+          expense.date.year == now.year &&
+          expense.date.month == now.month) {
+        if (expense.paymentType == PaymentType.cash) {
+          cashTotal += expense.amount;
+        } else if (expense.paymentType == PaymentType.bank) {
+          bankTotal += expense.amount;
+        }
+      }
+    }
+
+    emit(state.copyWith(
+        selectedButtonIndex: event.index,
+        cashTotal: cashTotal,
+        bankTotal: bankTotal));
   }
 }
